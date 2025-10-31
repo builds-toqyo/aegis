@@ -50,24 +50,22 @@ abstract contract BaseStrategy is
      * @notice Initializes the base strategy
      * @param asset_ The underlying asset
      * @param controller_ The controller address
-     * @param admin_ The admin address
      * @param name_ The strategy name
      */
     function __BaseStrategy_init(
         address asset_,
         address controller_,
-        address admin_,
         string memory name_
     ) internal onlyInitializing {
         __AccessControl_init();
         __Pausable_init();
-        __ReentrancyGuard_init();
 
         asset = asset_;
         controller = controller_;
         name = name_;
 
-        _grantRole(DEFAULT_ADMIN_ROLE, admin_);
+        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
+        _grantRole(ADMIN_ROLE, msg.sender);
         _grantRole(ADMIN_ROLE, admin_);
         _grantRole(CONTROLLER_ROLE, controller_);
     }

@@ -2,27 +2,27 @@
 
 Comprehensive end-to-end testing suite for the Aegis Yield ecosystem.
 
-## 📁 Directory Structure
+##  Directory Structure
 
 ```
 test/
-├── integration/        # Integration tests
-│   ├── vault_test.py
-│   ├── controller_test.py
-│   └── strategies_test.py
-├── e2e/               # End-to-end scenarios
-│   ├── deposit_withdraw_test.py
-│   ├── rebalance_test.py
-│   └── emergency_test.py
-├── fixtures/          # Test fixtures and data
-│   ├── contracts.json
-│   └── test_data.json
-└── utils/             # Test utilities
-    ├── helpers.py
-    └── assertions.py
+ integration/        # Integration tests
+    vault_test.py
+    controller_test.py
+    strategies_test.py
+ e2e/               # End-to-end scenarios
+    deposit_withdraw_test.py
+    rebalance_test.py
+    emergency_test.py
+ fixtures/          # Test fixtures and data
+    contracts.json
+    test_data.json
+ utils/             # Test utilities
+     helpers.py
+     assertions.py
 ```
 
-## 🧪 Test Categories
+##  Test Categories
 
 ### Unit Tests
 - **Contracts**: `contracts/test/` (Foundry tests)
@@ -31,18 +31,18 @@ test/
 
 ### Integration Tests
 Test interactions between components:
-- Vault ↔ Controller
-- Controller ↔ Strategies
-- Backend ↔ Blockchain
-- Backend ↔ ML Engine
+- Vault  Controller
+- Controller  Strategies
+- Backend  Blockchain
+- Backend  ML Engine
 
 ### End-to-End Tests
 Full user flows:
-- Deposit → Rebalance → Withdraw
+- Deposit  Rebalance  Withdraw
 - Emergency scenarios
 - Multi-strategy operations
 
-## 🚀 Running Tests
+##  Running Tests
 
 ### All Tests
 ```bash
@@ -80,13 +80,13 @@ cd backend && go test -cover ./...
 cd ml-engine && pytest --cov=src
 ```
 
-## 📊 Test Requirements
+##  Test Requirements
 
 - Local Anvil node for contract tests
 - Test RPC endpoint for integration tests
 - Mock ML service for backend tests
 
-## 🔧 Configuration
+##  Configuration
 
 Create `test/.env.test`:
 ```bash
@@ -95,7 +95,7 @@ TEST_PRIVATE_KEY=0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2f
 ML_API_URL=http://localhost:5000
 ```
 
-## 📝 Writing Tests
+##  Writing Tests
 
 ### Solidity (Foundry)
 ```solidity
@@ -138,14 +138,14 @@ def test_prediction():
     assert output.shape == (1, 2)
 ```
 
-## 🎯 Coverage Goals
+##  Coverage Goals
 
 - Contracts: >90%
 - Backend: >80%
 - ML Engine: >75%
 - Integration: >70%
 
-## 📈 CI/CD Integration
+##  CI/CD Integration
 
 Tests run automatically on:
 - Pull requests

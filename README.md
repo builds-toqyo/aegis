@@ -34,17 +34,17 @@ aegis/
 
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/builds-toqyo/aegis.git
 cd aegis
 
 # Install Foundry dependencies
 cd contracts && forge install
 
 # Install backend dependencies
-cd ../backend && go mod download  # or cargo build
+cd backend && go mod download  # or cargo build
 
 # Install ML engine dependencies
-cd ../ml-engine && pip install -r requirements.txt
+cd ml-engine && pip install -r requirements.txt
 ```
 
 ### Development

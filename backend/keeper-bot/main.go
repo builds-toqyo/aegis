@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	// "log"
 	"os"
 	"os/signal"
 	"syscall"
@@ -10,6 +9,8 @@ import (
 
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
+	
+	"github.com/aegis-yield/backend/web3-client"
 )
 
 var logger = logrus.New()
@@ -20,60 +21,93 @@ func main() {
 		logger.Warn("No .env file found")
 	}
 
-	// Initialize logger
+	// Configure logger
 	logger.SetFormatter(&logrus.JSONFormatter{})
 	logger.SetLevel(logrus.InfoLevel)
 
 	logger.Info("Starting Aegis Yield Keeper Bot...")
 
+	// Load configuration from environment
+	rpcURL := os.Getenv("BASE_RPC_URL")
+	if rpcURL == "" {
+		rpcURL = "https://mainnet.base.org"
+	}
+
+	artifactsPath := os.Getenv("DEPLOYMENT_ARTIFACTS_PATH")
+	if artifactsPath == "" {
+		artifactsPath = "./deployments/base-deployment.json"
+	}
+
+	privateKeyHex := os.Getenv("KEEPER_PRIVATE_KEY")
+	if privateKeyHex == "" {
+		logger.Fatal("KEEPER_PRIVATE_KEY environment variable is required")
+	}
+
+	mlAPIURL := os.Getenv("ML_API_URL")
+	if mlAPIURL == "" {
+		mlAPIURL = "http://localhost:5000"
+	}
+
+	// Initialize contract manager
+	contractManager, err := web3client.NewContractManager(rpcURL, artifactsPath, privateKeyHex, logger)
+	if err != nil {
+		logger.WithError(err).Fatal("Failed to initialize contract manager")
+	}
+	defer contractManager.Close()
+
+	// Initialize rebalancer
+	rebalancer := NewRebalancer(contractManager, mlAPIURL, logger)
+
 	// Create context with cancellation
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	// Handle graceful shutdown
+	// Setup graceful shutdown
 	sigChan := make(chan os.Signal, 1)
 	signal.Notify(sigChan, syscall.SIGINT, syscall.SIGTERM)
 
-	// Start keeper bot
-	go runKeeper(ctx)
+	go func() {
+		<-sigChan
+		logger.Info("Shutdown signal received, stopping keeper bot...")
+		cancel()
+	}()
 
-	// Wait for shutdown signal
-	<-sigChan
-	logger.Info("Shutdown signal received, stopping keeper bot...")
-	cancel()
+	// Start the keeper bot
+	if err := runKeeper(ctx, rebalancer); err != nil {
+		logger.WithError(err).Fatal("Keeper bot failed")
+	}
 
-	// Give time for graceful shutdown
-	time.Sleep(2 * time.Second)
-	logger.Info("Keeper bot stopped")
+	logger.Info("Keeper bot stopped gracefully")
 }
 
-func runKeeper(ctx context.Context) {
-	rebalanceInterval := 1 * time.Hour // TODO: Load from config
+func runKeeper(ctx context.Context, rebalancer *Rebalancer) error {
+	// Rebalancing interval from environment or default to 1 hour
+	intervalStr := os.Getenv("REBALANCE_INTERVAL")
+	rebalanceInterval := time.Hour
+	if intervalStr != "" {
+		if duration, err := time.ParseDuration(intervalStr); err == nil {
+			rebalanceInterval = duration
+		}
+	}
+
 	ticker := time.NewTicker(rebalanceInterval)
 	defer ticker.Stop()
 
-	logger.Info("Keeper bot running, checking for rebalancing opportunities...")
+	logger.WithField("interval", rebalanceInterval).Info("Keeper bot started")
+
+	// Execute rebalance immediately on startup
+	if err := rebalancer.ExecuteRebalance(ctx); err != nil {
+		logger.WithError(err).Error("Initial rebalancing failed")
+	}
 
 	for {
 		select {
 		case <-ctx.Done():
-			return
+			return nil
 		case <-ticker.C:
-			if err := executeRebalance(ctx); err != nil {
+			if err := rebalancer.ExecuteRebalance(ctx); err != nil {
 				logger.WithError(err).Error("Rebalancing failed")
 			}
 		}
 	}
-}
-
-func executeRebalance(_ context.Context) error {
-	logger.Info("Checking if rebalancing is needed...")
-
-	// TODO: Implement rebalancing logic
-	// 1. Fetch current portfolio state from blockchain
-	// 2. Query ML engine for predictions
-	// 3. Run optimization solver
-	// 4. Execute rebalance transaction if needed
-
-	return nil
 }

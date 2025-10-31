@@ -66,7 +66,6 @@ abstract contract BaseStrategy is
 
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _grantRole(ADMIN_ROLE, msg.sender);
-        _grantRole(ADMIN_ROLE, admin_);
         _grantRole(CONTROLLER_ROLE, controller_);
     }
 

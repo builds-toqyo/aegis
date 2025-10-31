@@ -1,0 +1,85 @@
+# ===========================
+# Root Level Ignores
+# ===========================
+.DS_Store
+.env
+.env.local
+*.log
+*.swp
+*.swo
+*~
+
+# ===========================
+# Contracts (Foundry/Solidity)
+# ===========================
+contracts/cache/
+contracts/out/
+contracts/broadcast/
+contracts/lib/
+contracts/.env
+contracts/lcov.info
+
+# ===========================
+# Backend (Go)
+# ===========================
+backend/bin/
+backend/vendor/
+backend/*.exe
+backend/*.test
+backend/*.out
+backend/.env
+
+# Backend (Rust)
+backend/target/
+backend/Cargo.lock
+backend/**/*.rs.bk
+
+# ===========================
+# ML Engine (Python)
+# ===========================
+ml-engine/__pycache__/
+ml-engine/*.py[cod]
+ml-engine/*$py.class
+ml-engine/.Python
+ml-engine/venv/
+ml-engine/env/
+ml-engine/.venv/
+ml-engine/ENV/
+ml-engine/data/raw/*.csv
+ml-engine/data/raw/*.json
+ml-engine/models/*.pth
+ml-engine/models/*.h5
+ml-engine/models/*.pkl
+ml-engine/models/*.joblib
+ml-engine/.ipynb_checkpoints/
+ml-engine/*.egg-info/
+ml-engine/dist/
+ml-engine/build/
+
+# ===========================
+# Scripts
+# ===========================
+scripts/logs/
+scripts/*.pid
+
+# ===========================
+# Test
+# ===========================
+test/coverage/
+test/reports/
+test/.pytest_cache/
+
+# ===========================
+# IDE
+# ===========================
+.vscode/
+.idea/
+*.iml
+.fleet/
+
+# ===========================
+# Node (if using any tooling)
+# ===========================
+node_modules/
+package-lock.json
+yarn.lock

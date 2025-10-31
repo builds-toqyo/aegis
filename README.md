@@ -2,7 +2,7 @@
 
 A sophisticated DeFi yield optimization platform leveraging AI/ML for dynamic portfolio rebalancing across multiple protocols on Base L2.
 
-## 🏗️ Architecture Overview
+##  Architecture Overview
 
 Aegis Yield is built as a monorepo containing three distinct technology stacks:
 
@@ -10,18 +10,18 @@ Aegis Yield is built as a monorepo containing three distinct technology stacks:
 - **Go/Rust Backend** - High-performance keeper bot and optimization engine
 - **Python ML Engine** - LSTM-based yield prediction and risk modeling
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 aegis/
-├── contracts/          # Solidity smart contracts (Foundry)
-├── backend/           # Go/Rust keeper bot and API
-├── ml-engine/         # Python ML models and data pipelines
-├── scripts/           # Deployment and automation scripts
-└── test/              # End-to-end integration tests
+ contracts/          # Solidity smart contracts (Foundry)
+ backend/           # Go/Rust keeper bot and API
+ ml-engine/         # Python ML models and data pipelines
+ scripts/           # Deployment and automation scripts
+ test/              # End-to-end integration tests
 ```
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 
@@ -60,14 +60,14 @@ cd backend && go run keeper-bot/main.go
 cd ml-engine && python scripts/train.py
 ```
 
-## 🔐 Security
+##  Security
 
 - All contracts use OpenZeppelin's audited libraries
 - UUPS upgradeable pattern for future improvements
 - Multi-signature governance controls
 - Comprehensive test coverage (>90%)
 
-## 📊 Key Features
+##  Key Features
 
 - **ERC-4626 Compliant Vault** - Standard tokenized vault interface
 - **Multi-Strategy Architecture** - Aave, Lido, and Delta-neutral strategies
@@ -75,7 +75,7 @@ cd ml-engine && python scripts/train.py
 - **Cross-Chain Bridge Support** - L1 Lido integration via Base bridge
 - **Real-Time Risk Management** - Chainlink oracles and custom risk metrics
 
-## 🛠️ Technology Stack
+##  Technology Stack
 
 ### Smart Contracts
 - Solidity 0.8.20+
@@ -93,14 +93,14 @@ cd ml-engine && python scripts/train.py
 - Pandas, NumPy, Scikit-learn
 - Flask / FastAPI
 
-## 📝 License
+##  License
 
 MIT License - See LICENSE file for details
 
-## 🤝 Contributing
+##  Contributing
 
 Please read CONTRIBUTING.md for details on our code of conduct and the process for submitting pull requests.
 
-## 📧 Contact
+##  Contact
 
 For questions and support, please open an issue in the repository.

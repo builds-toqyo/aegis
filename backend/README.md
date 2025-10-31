@@ -2,33 +2,33 @@
 
 High-performance Go backend for the Aegis Yield keeper bot, optimization solver, and API services.
 
-## 📁 Directory Structure
+##  Directory Structure
 
 ```
 backend/
-├── keeper-bot/          # Keeper bot entry point
-│   └── main.go
-├── web3-client/         # Blockchain interaction layer
-│   ├── base_connector.go
-│   └── contracts.go
-├── data-aggregator/     # Data collection and aggregation
-│   ├── aggregator.go
-│   └── sources.go
-├── optimization-solver/ # Portfolio optimization engine
-│   ├── solver.go
-│   └── constraints.go
-├── api-service/         # REST API endpoints
-│   ├── api.go
-│   ├── handlers.go
-│   └── middleware.go
-├── pkg/                 # Shared packages
-│   ├── config/
-│   ├── logger/
-│   └── utils/
-└── go.mod
+ keeper-bot/          # Keeper bot entry point
+    main.go
+ web3-client/         # Blockchain interaction layer
+    base_connector.go
+    contracts.go
+ data-aggregator/     # Data collection and aggregation
+    aggregator.go
+    sources.go
+ optimization-solver/ # Portfolio optimization engine
+    solver.go
+    constraints.go
+ api-service/         # REST API endpoints
+    api.go
+    handlers.go
+    middleware.go
+ pkg/                 # Shared packages
+    config/
+    logger/
+    utils/
+ go.mod
 ```
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 
@@ -71,7 +71,7 @@ go run keeper-bot/main.go
 go run api-service/main.go
 ```
 
-## 🧪 Testing
+##  Testing
 
 ```bash
 # Run all tests
@@ -84,7 +84,7 @@ go test -cover ./...
 go test ./web3-client
 ```
 
-## 📊 Architecture
+##  Architecture
 
 ### Keeper Bot
 The keeper bot monitors the vault state and triggers rebalancing when conditions are met:
@@ -120,13 +120,13 @@ REST API for monitoring and management:
 - Rebalancing history
 - System health
 
-## 🔐 Security
+##  Security
 
 - Private keys stored in environment variables
 - Secure RPC connection (HTTPS/WSS)
 - Rate limiting on API endpoints
 - Input validation and sanitization
 
-## 📝 License
+##  License
 
 MIT License

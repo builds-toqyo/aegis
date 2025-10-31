@@ -2,35 +2,35 @@
 
 Solidity smart contracts for the Aegis Yield Dynamic Portfolio Vault on Base L2.
 
-## 📁 Directory Structure
+##  Directory Structure
 
 ```
 contracts/
-├── src/
-│   ├── vault/              # Core vault contracts
-│   │   ├── AegisVault.sol
-│   │   └── AegisController.sol
-│   ├── strategies/         # Yield generation strategies
-│   │   ├── StrategyAaveBase.sol
-│   │   ├── StrategyLidoL1.sol
-│   │   └── StrategyDeltaMax.sol
-│   ├── interfaces/         # Contract interfaces
-│   │   ├── IAegisStrategy.sol
-│   │   ├── IAegisController.sol
-│   │   ├── IBridge.sol
-│   │   └── IRiskOracle.sol
-│   ├── libs/              # Shared libraries
-│   │   └── AegisRiskMath.sol
-│   └── mocks/             # Testing mocks
-│       ├── MockERC20.sol
-│       ├── MockChainlinkFeed.sol
-│       └── MockBridge.sol
-├── script/                # Deployment scripts
-├── test/                  # Contract tests
-└── foundry.toml          # Foundry configuration
+ src/
+    vault/              # Core vault contracts
+       AegisVault.sol
+       AegisController.sol
+    strategies/         # Yield generation strategies
+       StrategyAaveBase.sol
+       StrategyLidoL1.sol
+       StrategyDeltaMax.sol
+    interfaces/         # Contract interfaces
+       IAegisStrategy.sol
+       IAegisController.sol
+       IBridge.sol
+       IRiskOracle.sol
+    libs/              # Shared libraries
+       AegisRiskMath.sol
+    mocks/             # Testing mocks
+        MockERC20.sol
+        MockChainlinkFeed.sol
+        MockBridge.sol
+ script/                # Deployment scripts
+ test/                  # Contract tests
+ foundry.toml          # Foundry configuration
 ```
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Installation
 
@@ -70,7 +70,7 @@ forge script script/Deploy.s.sol --rpc-url base --broadcast --verify
 forge script script/Deploy.s.sol --rpc-url base --broadcast --verify --slow
 ```
 
-## 🔐 Security Features
+##  Security Features
 
 - **ERC-4626 Compliance** - Standard tokenized vault interface
 - **UUPS Upgradeable** - Secure upgrade pattern via OpenZeppelin
@@ -78,7 +78,7 @@ forge script script/Deploy.s.sol --rpc-url base --broadcast --verify --slow
 - **Reentrancy Guards** - Protection against reentrancy attacks
 - **Pause Mechanism** - Emergency stop functionality
 
-## 📊 Key Contracts
+##  Key Contracts
 
 ### AegisVault.sol
 ERC-4626 compliant vault that accepts deposits and mints shares. Manages user funds and delegates strategy execution to the Controller.
@@ -91,13 +91,13 @@ The "brain" of the system. Receives rebalancing instructions from the keeper bot
 - **StrategyLidoL1** - Bridges to L1 for Lido staking (satellite strategy)
 - **StrategyDeltaMax** - Delta-neutral yield farming
 
-## 🧪 Testing Strategy
+##  Testing Strategy
 
 - Unit tests for each contract
 - Integration tests for multi-contract interactions
 - Fuzz testing for edge cases
 - Invariant testing for system properties
 
-## 📝 License
+##  License
 
 MIT License

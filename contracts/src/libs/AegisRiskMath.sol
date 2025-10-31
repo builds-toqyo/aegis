@@ -93,17 +93,17 @@ library AegisRiskMath {
     }
 
     /**
-     * @notice Calculates the Value at Risk (VaR) using historical method
-     * @param portfolioValue The current portfolio value
+     * @notice Calculates Value at Risk (VaR) for a portfolio
+     * @param portfolioValue The total portfolio value
      * @param volatility The portfolio volatility (in basis points)
      * @param confidenceLevel The confidence level (in basis points, e.g., 9500 for 95%)
-     * @return var The Value at Risk
+     * @return valueAtRisk The Value at Risk
      */
     function calculateVaR(
         uint256 portfolioValue,
         uint256 volatility,
         uint256 confidenceLevel
-    ) internal pure returns (uint256 var) {
+    ) internal pure returns (uint256 valueAtRisk) {
         // Simplified VaR calculation using normal distribution approximation
         // For 95% confidence: z-score ≈ 1.645
         // For 99% confidence: z-score ≈ 2.326
@@ -117,7 +117,7 @@ library AegisRiskMath {
             zScore = 1282; // 90% confidence
         }
         
-        var = (portfolioValue * volatility * zScore) / (BASIS_POINTS * 1000);
+        valueAtRisk = (portfolioValue * volatility * zScore) / (BASIS_POINTS * 1000);
     }
 
     /**
